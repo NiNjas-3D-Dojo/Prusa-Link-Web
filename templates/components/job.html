@@ -6,16 +6,15 @@
 #}
 
 <div id="job" {{ to_hidden }}>
-  <div class="job-title">
-    <p
-      data-type="job"
-      data-where="file.displayName"
-      class="txt-bold txt-md file-name"
-    ></p>
-    <button id="job-close" class="close-button"></button>
-  </div>
+  <p
+    data-type="job"
+    data-where="job.file.name"
+    class="txt-bold txt-size-2 project-name"
+  ></p>
   <div id="preview-wrapper">
-    
+    <div class="preview-img">
+      <img id="preview-img" src="{{ pre.countOrRenderAssets('thumbnail.svg') | safe }}" />
+    </div>
       <!-- prettier-ignore -->
       {% include "components/job/progress.html" %}
     <div class="job-details">
@@ -23,8 +22,6 @@
       {% set current_stats = props %}
       {% include "components/job/props.html" %}
     </div>
-    <!-- prettier-ignore -->
-    {% include "components/job/loading-overlay.html" %}
   </div>
   <!-- prettier-ignore -->
   {% if env.PRINTER_TYPE == "sla" %}
@@ -38,10 +35,10 @@
     <!-- prettier-ignore -->
     {% include "components/job/buttons.html" %}
   </div>
+
+    <!-- prettier-ignore -->
+  {% include "components/job/loading-overlay.html" %}
 </div>
 
 <!-- prettier-ignore -->
 {% include "components/modal/confirmPrint.html" %}
-
-<!-- prettier-ignore -->
-{% include "components/modal/confirm.html" %}

@@ -1,6 +1,6 @@
 {
   "name": "prusalink",
-  "version": "3.12.0",
+  "version": "3.10.3",
   "description": "This is a printer connect webservice. It is compatible with other 3D printer services, so many applications can use this service.",
   "private": false,
   "scripts": {
@@ -16,8 +16,7 @@
     "build:mini": "webpack --config config.mini.js --env locales && webpack --config config.mini.js",
     "start:custom": "webpack --config config.custom.js --env locales dev && webpack serve --config config.custom.js --env dev",
     "build:custom": "webpack --config config.custom.js --env locales && webpack --config config.custom.js",
-    "recolor": "node tools/recolor_icons",
-    "words:extract": "node tools/preprocessing/extract-words.js"
+    "recolor": "node tools/recolor_icons"
   },
   "repository": {
     "type": "git",
@@ -39,14 +38,13 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.0",
-    "@webpack-cli/init": "^1.1.3",
+    "@webpack-cli/init": "^1.0.2",
     "autoprefixer": "^10.0.1",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "body-parser": "^1.19.0",
     "chokidar": "^3.5.1",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.0",
-    "dotenv-webpack": "^8.0.1",
     "express-basic-auth": "^1.2.0",
     "file-loader": "^6.2.0",
     "html-inline-css-webpack-plugin": "^1.9.0",
@@ -57,7 +55,7 @@
     "mini-css-extract-plugin": "^1.2.1",
     "mini-svg-data-uri": "^1.2.3",
     "multer": "^1.4.2",
-    "nunjucks": "^3.2.4",
+    "nunjucks": "^3.2.2",
     "postcss": "^8.2.4",
     "postcss-cli": "^8.1.0",
     "postcss-csso": "^5.0.0",
@@ -65,10 +63,10 @@
     "postcss-nested": "^5.0.1",
     "precss": "^4.0.0",
     "prettier": "2.2.1",
-    "svgo": "^3.0.2",
+    "svgo": "^1.3.2",
     "terser-webpack-plugin": "^5.0.2",
-    "webpack": "^5.76.0",
+    "webpack": "^5.15.0",
     "webpack-cli": "^4.1.0",
-    "webpack-dev-server": "^4.11.1"
+    "webpack-dev-server": "^3.11.2"
   }
 }

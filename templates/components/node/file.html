@@ -8,22 +8,22 @@
 <!-- prettier-ignore -->
 {% if env.PRINTER_TYPE == "sla" %}
     {%
-        set file_list = [
-          {"text": "Printing time", "label": "prop.est-pnt-time", "format": "est-time", "location": "meta.estimatedPrintTime", "icon": "time_color.svg" },
-          {"text": "Material", "label": "prop.material", "format": "material", "location": "meta.material", "icon": "status_filament.svg" },
-          {"text": "Layer Height", "label": "prop.layer-ht", "format": "layer", "location": "meta.layerHeight", "icon": "quality_medium.svg" },
+        set project_list = [
+          {"text": "Printing time", "label": "prop.est-pnt-time", "format": "est-time", "location": "gcodeAnalysis.estimatedPrintTime", "icon": "time_color.svg" },
+          {"text": "Material", "label": "prop.material", "format": "material", "location": "gcodeAnalysis.material", "icon": "status_filament.svg" },
+          {"text": "Layer Height", "label": "prop.layer-ht", "format": "layer", "location": "gcodeAnalysis.layerHeight", "icon": "quality_medium.svg" },
           {"separator": true},
-          {"additional": true, "format": "date", "location": "m_timestamp" },
+          {"additional": true, "format": "date", "location": "date" },
           {"additional": true, "format": "size", "location": "size" }
         ]
     %}
 {% else %}
     {%
-        set file_list = [
-          {"text": "Printing time", "label": "prop.pnt-time", "format": "time", "location": "meta.estimatedPrintTime", "icon": "time_color.svg" },
-          {"text": "Material", "label": "prop.material", "format": "material", "location": "meta.filament_type", "icon": "status_filament.svg" },
+        set project_list = [
+          {"text": "Printing time", "label": "prop.pnt-time", "format": "time", "location": "gcodeAnalysis.estimatedPrintTime", "icon": "time_color.svg" },
+          {"text": "Material", "label": "prop.material", "format": "material", "location": "gcodeAnalysis.material", "icon": "status_filament.svg" },
           {"separator": true},
-          {"additional": true, "format": "date", "location": "m_timestamp" },
+          {"additional": true, "format": "date", "location": "date" },
           {"additional": true, "format": "size", "location": "size" }
         ]
     %}
@@ -32,30 +32,25 @@
 <!-- prettier-ignore -->
 {%
   set buttons = {
-    'details': {text: 'File details', label: 'proj.details', pc_icon: 'file_details.svg', mobile_icon: 'file_details_light.svg', implemented: true },
+    'details': {text: 'Project details', label: 'proj.details', pc_icon: 'project_details.svg', mobile_icon: 'project_details_light.svg', implemented: true },
     'start': {text: 'Start print', label: 'proj.start', pc_icon: 'print.svg', mobile_icon: 'print_light.svg', implemented: false },
     'delete': {text: 'Delete', label: 'proj.del', pc_icon: 'delete.svg', mobile_icon: 'delete_light.svg', implemented: true },
     'rename': {text: 'Rename', label: 'proj.rename', pc_icon: 'edit.svg', mobile_icon: 'edit_light.svg', implemented: false },
-    'download': {text: 'Download', label: 'proj.download', pc_icon: 'download_alt.svg', mobile_icon: 'download_alt_light.svg', implemented: env.WITH_DOWNLOAD_BUTTON }
+    'download': {text: 'Download', label: 'proj.download', pc_icon: 'download_alt.svg', mobile_icon: 'download_alt_light.svg', implemented: true }
   }
 %}
 
-<template id="node-file">
+<template id="node-project">
   <div class="node line">
     <div class="node-img-box">
-      <img
-        class="node-img"
-        src="{{ pre.countOrRenderAssets('thumbnail.svg') | safe }}"
-        data-firmware="{{ pre.countOrRenderAssets('firmware-icon.svg') | safe }}"
-        data-file="{{ pre.countOrRenderAssets('file-icon.svg') | safe }}"
-      />
+      <img class="node-img" src="{{ pre.countOrRenderAssets('thumbnail.svg') | safe }}" />
     </div>
-    <div class="node-wrapper txt-sm">
+    <div class="node-wrapper txt-size-3">
       <div class="node-header">
-        <p id="name" class="txt-md txt-bold"></p>
+        <p id="name" class="txt-size-2 txt-bold"></p>
         <div class="kebab kebab-responsive">
           <img class="kebab-menu icon" src="{{ pre.countOrRenderAssets('kebab_menu.svg') | safe }}" />
-          <ul class="txt-black txt-md">
+          <ul class="txt-black txt-size-2">
             {% for key, values in buttons %}
               {% if values.implemented %}
                 <li id="{{ key }}" data-label="{{ values.label }}" data-label-target="title" title="{{ values.text }}">
@@ -72,7 +67,7 @@
       </div>
 
       <div class="node-details">
-        {% for values in file_list %}
+        {% for values in project_list %}
           {% if values.separator %}
             <div class="separator pc-only"></div>
           {% else %}
